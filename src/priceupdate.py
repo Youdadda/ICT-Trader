@@ -34,4 +34,4 @@ context = ssl.create_default_context()
 
 with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as smtp:
     smtp.login("testanddev101@gmail.com",email_pass)
-    smtp.sendmail("testanddev101@gmail.com","yoloforfun01@gmail.com",msg.as_string())
+    smtp.sendmail(os.environ.get("MSG_FROM"),os.environ.get("MSG_TO"),msg.as_string())
