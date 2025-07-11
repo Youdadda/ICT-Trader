@@ -1,0 +1,3 @@
+yfinance
+secure-smtplib
+dotenv
