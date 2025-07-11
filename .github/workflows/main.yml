@@ -1,0 +1,36 @@
+name : Daily price update
+
+on :
+  schedule:
+    - cron: "50 15 * * *"
+  workflow_dispatch:
+jobs:
+  priceupdate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name : Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      
+      - name: Create virtual environement
+        run: python -m venv .
+      
+      - name: Install requirements.txt
+        run: |
+          source bin/activate
+          pip install -r requirements.txt
+      
+      - name : execute scripts
+        run: |
+          source bin/activate
+          python ./src/priceupdate.py
+        env:
+          MSG_FROM: ${{ secrets.MSG_FROM }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          MSG_TO: ${{ secrets.MSG_TO }}
