@@ -3,6 +3,7 @@ name : Daily price update
 on :
   schedule:
     - cron: "50 15 * * *"
+  workflow_dispatch:
 jobs:
   priceupdate:
     runs-on: ubuntu-latest
